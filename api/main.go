@@ -8,7 +8,7 @@ import (
 type history struct{
 	Date string `json: "date"`
 	Operation string `json: "operation"`
-	Result int `json: "result"`
+	Result float64 `json: "result"`
 }
 
 var historys = []history{}
@@ -29,9 +29,25 @@ func postHistory(c *gin.Context){
 
 func main(){
 	router := gin.Default()
+	router.Use(corsMiddleware())
 
 	router.GET("/history", getHistory)
 	router.POST("/history", postHistory)
 
 	router.Run("localhost:3000")
+}
+
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+		c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusOK)
+			return
+		}
+
+		c.Next()
+	}
 }
