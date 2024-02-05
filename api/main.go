@@ -6,8 +6,7 @@ import (
 )
 
 type history struct{
-	Num1 int `json:"num1"`
-	Num2 int `json:"num2"`
+	Date string `json: "date"`
 	Operation string `json: "operation"`
 	Result int `json: "result"`
 }
