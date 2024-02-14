@@ -1,0 +1,18 @@
+
+
+### GET Historial
+GET http://localhost:3000/calculadora/history HTTP/1.1
+Database: prueba
+Authorization: dev
+
+### POST Historial
+POST http://localhost:3000/calculadora/history HTTP/1.1
+Database: prueba
+Authorization: dev
+Content-Type: application/json
+
+{
+	"date": "15:00",
+	"operation": "1 + 1",
+	"result": 2
+}
